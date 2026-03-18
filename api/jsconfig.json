@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "checkJs": true,
+    "module": "nodenext",
+    "target": "es2022"
+  },
+  "paths": {
+    "@/*": ["./*"],
+    "@shared/*": ["../shared/*"]
+  },
+  "include": ["./**/*", "../shared"]
+}

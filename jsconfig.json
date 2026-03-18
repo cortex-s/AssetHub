@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "checkJs": true,
+    "module": "nodenext",
+    "target": "es2022"
+  },
+
+  "include": ["api", "shared", "www"]
+}
