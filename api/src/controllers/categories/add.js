@@ -1,10 +1,15 @@
 import { ValidationError } from "../../../../shared/errors/validation.error.js";
-import { categorySchema } from "../../../../shared/validators/src/assets/index.js";
+import { categorySchema } from "../../../../shared/validators/src/categories.js";
 import { db } from "../../lib/db.js";
 import { handler } from "../../utils/handler.js";
 
+const schema = categorySchema.add.transform((x) => ({
+  name: x.name,
+  description: x.description || null,
+}));
+
 export const add = handler(async (req, res) => {
-  const parsed = categorySchema.add.safeParse(req.body);
+  const parsed = schema.safeParse(req.body);
   if (!parsed.success) {
     throw new ValidationError(parsed.error.flatten().fieldErrors);
   }
