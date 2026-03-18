@@ -72,20 +72,19 @@ enum AssetsStatus {
 }
 
 model Assets {
-  id        String @id
-  assetCode String @unique @db.VarChar(25) // LAP-001, LAP-002
-  serialNo  String @unique @db.VarChar(100)
-  name      String @db.VarChar(100) // ชื่อ เช่น "Notebook Acer, Macbook Pro M4 "
-  notes     String @db.VarChar(100)
+  id        String  @id
+  assetCode String  @unique @db.VarChar(25) // LAP-001, LAP-002
+  serialNo  String  @unique @db.VarChar(100)
+  name      String  @db.VarChar(100) // ชื่อ เช่น "Notebook Acer, Macbook Pro M4 "
+  notes     String? @db.VarChar(100)
 
-  categoryId String     @db.VarChar(100)
-  category   Categories @relation(fields: [categoryId], references: [id])
+  categoryId String?     @db.VarChar(100)
+  category   Categories? @relation(fields: [categoryId], references: [id])
 
   status    AssetsStatus @default(available)
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
-
-  borrows Borrows[]
+  createdAt DateTime     @default(now()) @db.DateTime(0)
+  deletedAt DateTime?    @db.DateTime(0)
+  borrows   Borrows[]
 }
 
 model Borrows {
