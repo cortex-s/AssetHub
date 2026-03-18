@@ -1,5 +1,5 @@
 import { add } from "./add.js";
 import { edit } from "./edit.js";
-import { getAll } from "./getAll.js";
+import { list } from "./list.js";
 
-export const categoryControllers = { getAll, add, edit };
+export const categoryControllers = { list, add, edit };
