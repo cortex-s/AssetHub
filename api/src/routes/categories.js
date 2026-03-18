@@ -3,7 +3,7 @@ import { categoryControllers } from "../controllers/categories/index.js";
 
 const router = Router();
 
-router.get("/", categoryControllers.getAll);
+router.get("/", categoryControllers.list);
 router.post("/add", categoryControllers.add);
 router.patch("/edit", categoryControllers.edit);
 
