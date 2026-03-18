@@ -23,7 +23,9 @@
     "jsonwebtoken": "^9.0.3",
     "minio": "^8.0.7",
     "mysql2": "^3.19.1",
-    "nodemailer": "^8.0.2"
+    "nodemailer": "^8.0.2",
+    "odiff": "^1.5.0",
+    "zod": "^4.2.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
