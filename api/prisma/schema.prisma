@@ -45,7 +45,7 @@ model UserVerify {
 }
 
 model Sessions {
-  id     String @id @default(nanoid(8)) @db.VarChar(100)
+  id     String @id @db.VarChar(100)
   userId String @db.VarChar(100)
   user   Users  @relation(fields: [userId], references: [id])
 
@@ -71,22 +71,23 @@ enum AssetsStatus {
 }
 
 model Assets {
-  id        String @id @default(uuid()) @db.VarChar(100)
-  assetCode String @unique @db.VarChar(100)
-  name      String @db.VarChar(100)
+  id        String @id
+  assetCode String @unique // LAP-001, LAP-002
+  serialNo  String @unique
+  name      String // ชื่อ เช่น "Notebook Acer, Macbook Pro M4 "
 
-  categoryId String
+  categoryId String     @db.VarChar(100)
   category   Categories @relation(fields: [categoryId], references: [id])
 
   status    AssetsStatus @default(available)
-  createdAt DateTime     @default(now()) @db.DateTime(0)
-  updatedAt DateTime     @updatedAt @db.DateTime(0)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
 
   borrows Borrows[]
 }
 
 model Borrows {
-  id String @id @default(uuid()) @db.VarChar(100)
+  id String @id @db.VarChar(100)
 
   assetId String
   asset   Assets @relation(fields: [assetId], references: [id])
