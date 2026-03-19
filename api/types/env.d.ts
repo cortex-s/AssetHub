@@ -19,6 +19,8 @@ declare global {
       SMTP_URI: string;
 
       EMAIL_SENDER: string;
+
+      NODE_ENV: "production" | "development" | "test";
     }
   }
 }
