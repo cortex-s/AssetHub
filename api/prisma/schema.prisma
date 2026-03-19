@@ -110,7 +110,7 @@ model Borrows {
   dueDate    DateTime  @db.DateTime(0)
   returnDate DateTime? @db.DateTime(0)
 
-  createdAt DateTime @db.DateTime(0)
+  createdAt DateTime @db.DateTime(0) @default(now())
 }
 
 enum BorrowsStatus {
