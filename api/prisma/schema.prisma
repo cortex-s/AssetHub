@@ -94,6 +94,8 @@ model Borrows {
   assetId   String @db.VarChar(100)
   asset     Assets @relation(fields: [assetId], references: [id])
 
+  userId       String @db.VarChar(100)
+  user         Users  @relation(fields: [userId], references: [id])
   borrowerName String @db.VarChar(100)
 
   status BorrowsStatus @default(borrowed)
@@ -101,8 +103,8 @@ model Borrows {
   internalNotes       String? // สำหรับเจ้าหน้าที่เห็นเท่านั้น
   publicReturnedNotes String? // ผู้ใช้ทั่วไปสามารถเห็นได้
 
-  userId String
-  user   Users  @relation(fields: [userId], references: [id])
+  // Admin / Staff ที่อนุมัติ / ให้ยืม
+  approvedById String @db.VarChar(100)
 
   borrowDate DateTime  @default(now()) @db.DateTime(0)
   dueDate    DateTime  @db.DateTime(0)
