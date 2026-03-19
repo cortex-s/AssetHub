@@ -1,5 +1,5 @@
 /**
- * Get all Categories with pagination and sorting
+ * ดึงข้อมูลจากตารางหมวดหมู่ (Categories) และก็มี pagination ด้วยจะได้ประหยัดการโหลดข้อมูล
  *
  * Query Parameters:
  *   - page (default 1)
