@@ -2,11 +2,12 @@ import { verifyJwtToken } from "../lib/jwt.js";
 import { AppError } from "../../../shared/errors/app.error.js";
 import { handler } from "../utils/handler.js";
 
-// config: path → allowed roles
+// path config for rbac
 const rolesConfig = {
   "/api/@me": ["ANY"], // ทุก role เข้าได้
   "/api/users": ["ADMIN", "STAFF"],
   "/api/categories": ["ADMIN", "STAFF"],
+  "/api/assets": ["ADMIN", "STAFF"],
 };
 
 export const authMiddleware = handler((req, res, next) => {
