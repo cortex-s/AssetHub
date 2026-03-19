@@ -26,13 +26,10 @@ export const add = handler(async (req, res) => {
   if (data.categoryId) {
     // เช็คก่อนว่ามีหมวดหมู่ในตารางไหม ไม่งั้นพังตอน insert แน่นอน
     // แต่ถ้าเกิด race condition (มั้ง) ก็ไม่เป็นไรเพราะเราไม่ได้ลบข้อมูลจริงๆ แค่ soft delete และก็ค่อยไล่ cleanup ทีหลัง
-    const [hasCategory] = /** @type {[HasCategory[], any]} */ (
-      await db.query(
-        `SELECT name FROM Categories WHERE id = ? AND deletedAt is NULL`,
-        [data.categoryId],
-      )
-    );
-    if (hasCategory.length === 0) {
+    const hasCategory = await categoryModel.hasCategory(data.categoryId, [
+      "name",
+    ]);
+    if (!hasCategory) {
       data.categoryId = null;
     }
   }
