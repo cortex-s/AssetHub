@@ -36,9 +36,10 @@ export const register = handler(async (req, res) => {
       `INSERT INTO UserVerify (id, userId, token, expiresAt) VALUES (?, ?, ?, ?)`,
       [verifyId, userId, token, expiresAt],
     );
+
     await sendMail(
       data.email,
-      "[No Reply] การยืนยันตัวตนระบบ KU-Inventory",
+      "[Verification] การยืนยันตัวตนระบบ KU Asset Hub",
       `<div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
   <h2>ยืนยันการสมัครใช้งาน</h2>
 
