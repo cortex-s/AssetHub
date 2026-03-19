@@ -106,11 +106,11 @@ model Borrows {
   // Admin / Staff ที่อนุมัติ / ให้ยืม
   approvedById String @db.VarChar(100)
 
-  borrowDate DateTime  @default(now()) @db.DateTime(0)
+  borrowDate DateTime  @db.DateTime(0)
   dueDate    DateTime  @db.DateTime(0)
   returnDate DateTime? @db.DateTime(0)
 
-  createdAt DateTime @db.DateTime(0) @default(now())
+  createdAt DateTime @default(now()) @db.DateTime(0)
 }
 
 enum BorrowsStatus {
