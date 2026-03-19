@@ -15,7 +15,7 @@ export const info = handler(async (req, res) => {
   const [result] = /** @type {[UserRow[], any]} */ (
     await db.query(
       `SELECT firstname, lastname, email FROM Users WHERE id = ?`,
-      [req.user?.userId],
+      [req.user.userId],
     )
   );
   if (result.length === 0) {
