@@ -90,17 +90,25 @@ model Assets {
 model Borrows {
   id String @id @db.VarChar(100)
 
-  assetId String
-  asset   Assets @relation(fields: [assetId], references: [id])
+  assetName String @db.VarChar(100)
+  assetId   String @db.VarChar(100)
+  asset     Assets @relation(fields: [assetId], references: [id])
+
+  borrowerName String @db.VarChar(100)
+
+  status BorrowsStatus @default(borrowed)
+
+  internalNotes       String? // สำหรับเจ้าหน้าที่เห็นเท่านั้น
+  publicReturnedNotes String? // ผู้ใช้ทั่วไปสามารถเห็นได้
 
   userId String
   user   Users  @relation(fields: [userId], references: [id])
 
-  borrowDate DateTime  @default(now())
-  dueDate    DateTime
-  returnDate DateTime?
+  borrowDate DateTime  @default(now()) @db.DateTime(0)
+  dueDate    DateTime  @db.DateTime(0)
+  returnDate DateTime? @db.DateTime(0)
 
-  status BorrowsStatus @default(borrowed)
+  createdAt DateTime @db.DateTime(0)
 }
 
 enum BorrowsStatus {
