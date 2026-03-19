@@ -20,8 +20,12 @@ const ALLOWED_SORT_FIELDS = ["name", "createdAt"];
 const ALLOWED_SORT_ORDERS = ["ASC", "DESC"];
 
 export const list = handler(async (req, res) => {
-  const page = parseInt(String(req.query.page || "1"), 10);
-  const limit = parseInt(String(req.query.limit || "10"), 10);
+  const pageRaw = parseInt(String(req.query.page), 10);
+  const limitRaw = parseInt(String(req.query.limit), 10);
+
+  const page = Number.isInteger(pageRaw) && pageRaw > 0 ? pageRaw : 1;
+  const limit = Number.isInteger(limitRaw) && limitRaw > 0 ? limitRaw : 10;
+
   const offset = (page - 1) * limit;
 
   // Validate sort params
