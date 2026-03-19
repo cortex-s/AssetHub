@@ -8,7 +8,7 @@ import { signJwtToken, tokenExpiredSecond } from "../../lib/jwt.js";
 import { verifyPassword } from "../../lib/password.js";
 import { handler } from "../../utils/handler.js";
 
-// เป็น interface สำหรับการ query หา id, role, hashedPassword
+// เป็น interface สำหรับการ query หา id, role, hashedPassword จาก Users
 /**
  * @typedef {object} UserRow
  * @property {string} id
