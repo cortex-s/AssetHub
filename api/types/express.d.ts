@@ -3,7 +3,7 @@ import { $Enums } from "../src/lib/generated/prisma/index.js";
 
 declare module "express-serve-static-core" {
   interface Request {
-    user?: {
+    user: {
       userId: string;
       role: $Enums.Role;
       fullname: string;
