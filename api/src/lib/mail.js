@@ -10,11 +10,10 @@ const mailer = nodemailer.createTransport(process.env.SMTP_URI);
  */
 export async function sendMail(to, subject, html) {
   const x = await mailer.sendMail({
-    from: process.env.EMAIL_SENDER, // ใส่ email อื่นก็ได้ แต่ต้องยืนยันโดเมนกับระบบของ brevo.com
+    from: process.env.EMAIL_SENDER,
     to,
     subject,
     html,
   });
-  console.log(x);
   return x;
 }
