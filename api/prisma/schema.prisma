@@ -100,8 +100,8 @@ model Borrows {
 
   status BorrowsStatus @default(borrowed)
 
-  internalNotes       String? // สำหรับเจ้าหน้าที่เห็นเท่านั้น
-  publicReturnedNotes String? // ผู้ใช้ทั่วไปสามารถเห็นได้
+  internalNotes       String? @db.VarChar(500) // สำหรับเจ้าหน้าที่เห็นเท่านั้น
+  publicReturnedNotes String? @db.VarChar(500) // ผู้ใช้ทั่วไปสามารถเห็นได้
 
   // Admin / Staff ที่อนุมัติ / ให้ยืม
   approvedById String @db.VarChar(100)
