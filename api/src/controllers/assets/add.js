@@ -1,14 +1,8 @@
 import { ValidationError } from "../../../../shared/errors/validation.error.js";
 import { assetSchema } from "../../../../shared/validators/src/assets.js";
-import { db } from "../../lib/db.js";
+import { assetModel } from "../../models/assets/index.js";
+import { categoryModel } from "../../models/categories/index.js";
 import { handler } from "../../utils/handler.js";
-
-// เป็น interface สำหรับการ query หา name จาก Categories
-/**
- * @typedef {object} HasCategory
- * @property {string} name
- */
-// ------------------
 
 const schema = assetSchema.add.transform((x) => ({
   ...x,
@@ -34,11 +28,7 @@ export const add = handler(async (req, res) => {
     }
   }
 
-  await db.execute(
-    `INSERT INTO Assets (id, assetCode, serialNo, name, notes, categoryId) VALUES (UUID(), ?, ?, ?, ?, ?)`,
-    [data.assetCode, data.serialNo, data.name, data.notes, data.categoryId],
-  ); // ไม่ใส่ status เพราะก่อนจะให้ยืมก็ต้องมีของในระบบก่อน ดังนั้น status จะต้องเป็น available ก่อนเท่านั้น
-
+  await assetModel.insert(data);
   return res
     .status(201)
     .json({ message: "ลงข้อมูลทรัพย์สินสำเร็จ", code: "SUCCESS" });
