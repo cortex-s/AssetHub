@@ -94,6 +94,7 @@ model Borrows {
   assetName String @db.VarChar(100)
   assetId   String @db.VarChar(100)
   asset     Assets @relation(fields: [assetId], references: [id])
+  serialNo  String @db.VarChar(100)
 
   userId       String @db.VarChar(100)
   user         Users  @relation(fields: [userId], references: [id])
