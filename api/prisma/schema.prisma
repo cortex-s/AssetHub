@@ -90,6 +90,7 @@ model Assets {
 model Borrows {
   id String @id @db.VarChar(100)
 
+  assetCode String @db.VarChar(100)
   assetName String @db.VarChar(100)
   assetId   String @db.VarChar(100)
   asset     Assets @relation(fields: [assetId], references: [id])
