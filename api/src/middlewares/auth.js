@@ -8,6 +8,7 @@ const rolesConfig = {
   "/api/users": ["ADMIN", "STAFF"],
   "/api/categories": ["ADMIN", "STAFF"],
   "/api/assets": ["ADMIN", "STAFF"],
+  "/api/borrows": ["ADMIN", "STAFF"],
 };
 
 export const authMiddleware = handler((req, res, next) => {

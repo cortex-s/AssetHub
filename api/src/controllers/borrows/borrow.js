@@ -5,6 +5,7 @@ import { AppError } from "../../../../shared/errors/app.error.js";
 import { userModel } from "../../models/users/index.js";
 import { assetModel } from "../../models/assets/index.js";
 import { borrowModel } from "../../models/borrows/index.js";
+import { getFullName } from "../../utils/string.js";
 
 const schema = borrowSchema.borrow.transform((x) => ({
   ...x,
@@ -42,7 +43,11 @@ export const borrow = handler(async (req, res) => {
     throw new AppError("ไม่พบบัญชีผู้ยืม", "BORROWER_NOTFOUND", 404);
   }
 
-  await borrowModel.insert(asset, data, req.user.userId);
+  await borrowModel.borrow(
+    asset,
+    { ...data, borrowerName: getFullName(user.firstname, user.lastname) },
+    req.user.userId,
+  );
 
   return res
     .status(201)

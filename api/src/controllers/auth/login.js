@@ -51,7 +51,7 @@ export const login = handler(async (req, res) => {
   return res
     .status(200)
     .cookie("accessToken", token, {
-      httpOnly: true,
+      httpOnly: false,
       secure: false,
       sameSite: "lax",
       maxAge: 1000 * tokenExpiredSecond, // ms

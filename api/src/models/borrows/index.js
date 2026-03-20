@@ -1,3 +1,3 @@
-import { insert } from "./insert.js";
+import { borrow } from "./borrow.js";
 
-export const borrowModel = { insert };
+export const borrowModel = { borrow };

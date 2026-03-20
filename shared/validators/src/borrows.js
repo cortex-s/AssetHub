@@ -10,10 +10,6 @@ const returnDate = z.coerce.date().optional();
 
 const borrow = z.object({
   assetId: z.string("โปรดเลือกทรัพย์สิน").min(1, "โปรดเลือกทรัพย์สิน").max(100),
-  borrowerName: z
-    .string()
-    .min(1, "โปรดกรอกชื่อผู้ยืม")
-    .max(100, "จำกัด 100 ตัวอักษร"),
   userId: z.string("โปรดเลือกผู้ยืม").min(1, "โปรดเลือกผู้ยืม").max(100),
   borrowDate: z.coerce.date(),
   dueDate: z.coerce.date(),

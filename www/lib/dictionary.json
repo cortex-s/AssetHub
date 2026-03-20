@@ -1,4 +1,6 @@
 {
   "browser-image-compression": "https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.1/dist/browser-image-compression.js",
-  "zod": "https://cdn.jsdelivr.net/npm/zod@4.3.6/+esm"
+  "zod": "https://cdn.jsdelivr.net/npm/zod@4.2.1/+esm",
+  "axios": "https://cdn.jsdelivr.net/npm/axios@1.13.6/dist/axios.min.js",
+  "sweetalert2": "https://cdn.jsdelivr.net/npm/sweetalert2@11.26.24/+esm"
 }

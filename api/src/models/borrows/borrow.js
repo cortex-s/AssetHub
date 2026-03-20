@@ -23,11 +23,11 @@ import { db } from "../../lib/db.js";
  * @param {data} data
  * @param {string} approvedById
  */
-export async function insert(asset, data, approvedById) {
+export async function borrow(asset, data, approvedById) {
   await db.query(
     `INSERT INTO Borrows 
-      (assetName, assetId, userId, borrowerName, borrowDate, dueDate, returnDate, internalNotes, approvedById, createdAt) 
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())`,
+      (id, assetName, assetId, userId, borrowerName, borrowDate, dueDate, returnDate, internalNotes, approvedById, createdAt) 
+     VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())`,
     [
       asset.name,
       asset.id,

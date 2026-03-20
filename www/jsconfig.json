@@ -5,6 +5,6 @@
     "module": "nodenext",
     "target": "es2022"
   },
-  "exclude": ["../api/", "./validators/*"]
+  "exclude": ["../api/"]
 }
 // ./validators/* ใส่ไว้ป้องกันเผลอ import เพราะในส่วนโฟลเดอร์นี้จะไม่ใช่ dev เป็นคน import แต่จะให้ระบบทำงานอัตโนมัติ หรือที่เรียกว่าการ importmap ในไฟล์ index.html

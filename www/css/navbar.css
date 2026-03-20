@@ -1,0 +1,85 @@
+/* Base Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 256px; /* desktop */
+  background-color: var(--primary); 
+  color: white;
+  position: relative;
+  z-index: 10;
+  flex-wrap: wrap; /* ป้องกัน overflow */
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navbar a:hover {
+  color: #fbbf24;
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 16px;
+}
+
+.navbar-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Logo style */
+.navbar-brand .logo {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 24px 48px; /* ลดขอบซ้ายขวา */
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 24px;
+    flex-direction: row; /* ปรับ layout เป็น row */
+  }
+
+  .navbar-menu {
+    display: none; /* ซ่อนเมนู */
+    flex-direction: column;
+    gap: 12px;
+    position: absolute;
+    top: 100%; /* อยู่ใต้ navbar */
+    right: 24px;
+    background-color: #1f2937;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .navbar-menu.active {
+    display: flex; /* เปิด menu เมื่อ toggle */
+  }
+
+  .navbar-toggle {
+    display: block; /* แสดง hamburger */
+  }
+}
+
+/* Optional: hover effect mobile */
+.navbar-menu li a:hover {
+  color: #fbbf24;
+}
