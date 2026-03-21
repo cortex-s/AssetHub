@@ -15,7 +15,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "dev:api": "node --watch api/index.js",
+    "dev:api": "node --watch /api/src/index.js",
     "dev:www": "live-server www --port=5000",
     "dev": "concurrently -n API,WWW -c green,blue \"npm run dev:api\" \"npm run dev:www\"",
     "start:www": "npm run start -w www",
