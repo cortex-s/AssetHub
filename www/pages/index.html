@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asset Management</title>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "zod": "/lib/zod.js",
+          "../../shared/": "/shared/",
+          "../../shared/validators/": "/validators/",
+          "../../shared/errors/": "/errors/"
+        }
+      }
+    </script>
+
+    <!-- CSS split -->
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <script type="module" src="/components/navbar.js"></script>
+    <script type="module" src="/components/footer.js"></script>
+    <script type="module" src="main.js"></script>
+  </head>
+
+  <body>
+    <div id="navbar"></div>
+
+    <main class="main">
+      <section class="hero container">
+        <h2>จัดการทรัพย์สินภายใน<br />ให้เป็นเรื่องง่าย</h2>
+        <p>ระบบจัดการทรัพย์สิน การยืม-คืน และติดตามสถานะทั้งหมดในที่เดียว</p>
+
+        <div class="hero-buttons">
+          <a href="/pages/history">
+            <button class="btn-primary">เริ่มใช้งาน</button>
+          </a>
+          <a href="#">
+            <button class="btn-outline">ดูตัวอย่าง</button>
+          </a>
+        </div>
+      </section>
+
+      <section class="features container">
+        <div class="card">
+          <h3>📋 จัดการทรัพย์สิน</h3>
+          <p>เพิ่ม แก้ไข และจัดหมวดหมู่ได้ง่าย</p>
+        </div>
+
+        <div class="card">
+          <h3>🔄 ระบบยืม-คืน</h3>
+          <p>ติดตามสถานะการยืมได้แบบ real-time</p>
+        </div>
+
+        <div class="card">
+          <h3>📊 Dashboard</h3>
+          <p>ดูภาพรวมทั้งหมดในหน้าเดียว</p>
+        </div>
+      </section>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Asset Management</title>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "zod": "/lib/zod.js",
+          "/shared/validators/": "/validators/"
+        }
+      }
+    </script>
+
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="/lib/axios.js"></script>
+    <script type="module" src="/components/navbar.js"></script>
+    <script type="module" src="login.js"></script>
+  </head>
+
+  <body>
+    <div id="navbar"></div>
+    <main class="login-page">
+      <div class="login-card">
+        <h1 class="login-title">เข้าสู่ระบบ</h1>
+        <p class="login-desc">ระบบจัดการทรัพย์สินภายใน</p>
+
+        <form class="login-form">
+          <div
+            data-input
+            data-name="email"
+            data-label="อีเมล"
+            data-placeholder="กรอกอีเมล"
+          ></div>
+          <div
+            data-input
+            data-name="password"
+            data-label="รหัสผ่าน"
+            data-placeholder="กรอกรหัสผ่าน"
+          ></div>
+          <button type="submit" class="btn-primary login-btn">
+            เข้าสู่ระบบ
+          </button>
+        </form>
+        <p class="login-footer">
+          ยังไม่มีบัญชี? <span>ติดต่อผู้ดูแลระบบ</span>
+        </p>
+      </div>
+    </main>
+  </body>
+</html>

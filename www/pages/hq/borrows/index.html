@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Asset</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "zod": "/lib/zod.js",
+          "/shared/validators/": "/validators/"
+        }
+      }
+    </script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link href="/css/gridjs.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+
+    <script type="module" src="/components/navbar.js"></script>
+    <script type="module" src="/components/footer.js"></script>
+    <script src="/lib/gridjs.js"></script>
+    <script src="/lib/axios.js"></script>
+
+    <script type="module" src="script.js"></script>
+  </head>
+
+  <body>
+    <div id="navbar"></div>
+    <div class="container">
+      <div id="goback"></div>
+      <div>
+        <h1>ตารางข้อมูลการยืม</h1>
+        <a href="/pages/hq/borrows/add">
+          <button class="btn-primary">ลงข้อมูลการยืม</button>
+        </a>
+      </div>
+      <div id="table"></div>
+    </div>
+    <footer></footer>
+    <script type="module">
+      const API_URL = "http://localhost:8888/api/borrows";
+
+      let currentPage = 1;
+      const limit = 10;
+
+      // create empty grid first
+      const grid = new gridjs.Grid({
+        columns: [
+          "รหัสย่อทรัพย์",
+          "ชื่อทรัพย์",
+          "ชื่อผู้ยืม",
+          "S/N",
+          "สถานะ",
+          "วันที่ลงข้อมูล",
+          {
+            name: "จัดการ",
+            formatter: (_, row) => {
+              const id = row.cells[6].data;
+              return gridjs.html(`
+          <a href="/pages/hq/borrows/edit/index.html?id=${id}">
+            <button class="btn-primary">แก้ไข</button>
+          </a>
+        `);
+            },
+          },
+        ],
+        data: [],
+        pagination: {
+          limit: limit,
+        },
+      });
+
+      grid.render(document.getElementById("table"));
+
+      async function loadData() {
+        try {
+          const res = await axios.get(API_URL, {
+            params: {
+              page: currentPage,
+              limit: limit,
+            },
+            withCredentials: true, //  important if using cookies
+          });
+
+          const json = res.data;
+
+          grid
+            .updateConfig({
+              data: json.data.map((row) => [
+                row.assetCode,
+                row.assetName,
+                row.borrowerName,
+                row.serialNo,
+                row.status,
+                new Date(row.createdAt).toLocaleDateString(),
+                row.id,
+              ]),
+              pagination: {
+                limit: limit,
+                total: json.pagination.total,
+              },
+            })
+            .forceRender();
+        } catch (err) {
+          console.error("API error:", err);
+        }
+      }
+
+      // load first time
+      window.addEventListener("DOMContentLoaded", () => {
+        loadData();
+      });
+    </script>
+  </body>
+</html>

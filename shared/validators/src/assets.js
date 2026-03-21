@@ -28,7 +28,11 @@ const editAssetSchema = addAssetSchema.extend({
     ["available", "borrowed", "repair", "retired", "lost"],
     "โปรดเลือกสถานะทรัพย์สิน",
   ),
-});
+}).transform((x) => ({
+  ...x,
+  notes: x.notes || null,
+  categoryId: x.categoryId || null,
+}));;
 
 const deleteAssetSchema = z.object({ id: z.string().min(1).max(100) });
 

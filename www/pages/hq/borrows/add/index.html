@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Borrow</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "zod": "/lib/zod.js",
+          "/shared/validators/": "/validators/"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <script type="module" src="/components/footer.js"></script>
+    <script type="module" src="/components/navbar.js"></script>
+    <script type="module" src="/components/go-back.js"></script>
+    <script type="module" src="script.js"></script>
+
+    <script src="/lib/axios.js"></script>
+  </head>
+
+  <body>
+    <div id="navbar"></div>
+
+    <main class="container">
+      <div id="goback"></div>
+
+      <h1>เพิ่มรายการยืม</h1>
+
+      <form class="form-borrow">
+        <div class="grid">
+          <div
+            data-input
+            data-name="assetId"
+            data-label="ทรัพย์สิน"
+            data-type="select"
+            data-options=""
+          ></div>
+        </div>
+
+        <div class="grid">
+          <div
+            data-input
+            data-name="userId"
+            data-label="ผู้ยืม"
+            data-type="select"
+            data-options=""
+          ></div>
+        </div>
+
+        <div class="grid">
+          <div
+            data-input
+            data-name="internalNotes"
+            data-label="หมายเหตุ (ภายใน)"
+            data-placeholder="เฉพาะเจ้าหน้าที่"
+          ></div>
+
+          <div
+            data-input
+            data-name="publicReturnedNotes"
+            data-label="หมายเหตุ (ผู้ใช้เห็น)"
+            data-placeholder="หมายเหตุการคืน"
+          ></div>
+        </div>  
+
+        <div class="grid">
+          <div
+            data-input
+            data-name="borrowDate"
+            data-label="วันที่ยืม"
+            data-type="date"
+          ></div>
+
+          <div
+            data-input
+            data-name="dueDate"
+            data-label="กำหนดคืน"
+            data-type="date"
+          ></div>
+
+          <div
+            data-input
+            data-name="returnDate"
+            data-label="วันที่คืน"
+            data-type="date"
+          ></div>
+        </div>
+
+        <button type="submit" class="btn-primary">บันทึก</button>
+      </form>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>
