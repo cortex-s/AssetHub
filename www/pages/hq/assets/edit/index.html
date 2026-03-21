@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Assets</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "zod": "/lib/zod.js",
+          "/shared/validators/": "/validators/"
+        }
+      }
+    </script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <script type="module" src="/lib/zod.js"></script>
+    <script type="module" src="/lib/axios.js"></script>
+
+    <script type="module" src="/components/navbar.js"></script>
+    <script type="module" src="/components/footer.js"></script>
+    <script type="module" src="/components/go-back.js"></script>
+    <script type="module" src="script.js"></script>
+  </head>
+
+  <body>
+    <div id="navbar"></div>
+
+    <main class="container">
+      <div id="goback"></div>
+      <h1 id="hero-text">ทรัพย์สิน:</h1>
+
+      <form class="form-asset">
+        <div class="grid">
+          <div
+            data-input
+            data-name="assetCode"
+            data-label="รหัสย่อ"
+            data-placeholder="เช่น LAP-001"
+            disabled
+          ></div>
+          <div
+            data-input
+            data-name="serialNo"
+            data-label="Serial Number"
+            data-placeholder="Serial Number"
+            disabled
+          ></div>
+        </div>
+        <div
+          data-input
+          data-name="name"
+          data-label="ชื่อทรัพย์สิน"
+          data-placeholder="ชื่อทรัพย์สิน"
+        ></div>
+        <div
+          data-input
+          data-name="categoryId"
+          data-label="หมวดหมู่"
+          data-placeholder="หมวดหมู่ (ถ้ามี)"
+          data-type="select"
+          data-options=""
+        ></div>
+        <div
+          data-input
+          data-name="status"
+          data-label="สถานะ"
+          data-placeholder=""
+          data-type="select"
+          data-options=""
+        ></div>
+
+        <div
+          data-input
+          data-name="notes"
+          data-label="หมายเหตุ"
+          data-placeholder="หมายเหตุ (ถ้ามี)"
+        ></div>
+
+        <button type="submit" class="btn-primary">บันทึก</button>
+      </form>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>

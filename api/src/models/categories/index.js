@@ -1,3 +1,3 @@
 import { hasCategory } from "./hasCategory.js";
 
-export const categoryModel = {hasCategory};
+export const categoryModel = { hasCategory };

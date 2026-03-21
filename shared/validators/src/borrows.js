@@ -1,12 +1,12 @@
 import z from "zod";
 
 const status = z.enum(["borrowed", "returned", "overdue", "cancelled"]);
-const internalNotes = z.string().max(500, "จำกัด 500 ตัวอักษร").optional();
+const internalNotes = z.string().max(500, "จำกัด 500 ตัวอักษร").nullable().optional();
 const publicReturnedNotes = z
   .string()
   .max(500, "จำกัด 500 ตัวอักษร")
-  .optional();
-const returnDate = z.coerce.date().optional();
+  .nullable().optional();
+const returnDate = z.coerce.date().nullable().optional();
 
 const borrow = z.object({
   assetId: z.string("โปรดเลือกทรัพย์สิน").min(1, "โปรดเลือกทรัพย์สิน").max(100),
@@ -17,6 +17,12 @@ const borrow = z.object({
   internalNotes,
 });
 
-const edit = borrow.extend({ status, publicReturnedNotes, returnDate });
+const edit = z.object({
+  id: z.string().min(1).max(100),
+  status,
+  internalNotes,
+  publicReturnedNotes,
+  returnDate
+});
 
 export const borrowSchema = { borrow, edit };

@@ -12,8 +12,6 @@ declare global {
 
       ARGON2_SECRET_KEY: string;
 
-      RESEND_API_KEY: string;
-
       JWT_SECRET: string;
 
       SMTP_URI: string;

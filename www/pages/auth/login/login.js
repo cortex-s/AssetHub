@@ -10,15 +10,15 @@ import {
 import { hideLoading, showLoading } from "../../../components/loading.js";
 import { api } from "../../../utils/api.js";
 import Swal from "../../../lib/sweetalert2.js";
-import { isLoggedIn } from "../../../utils/cookie.js";
+import { getAuth } from "../../../utils/cookie.js";
 
 // เมื่อ window โหลดเสร็จ
 window.addEventListener("load", () => {
   showLoading();
 
-  const isLogged = isLoggedIn();
+  const isLogged = getAuth();
   if (isLogged) {
-    window.location.href = "/pages/index.html";
+    window.location.href = "/pages/";
   }
   const page = document.querySelector(".login-page");
 
@@ -29,7 +29,7 @@ window.addEventListener("load", () => {
   setTimeout(() => {
     hideLoading();
     page.style.visibility = "visible";
-  }, 500);
+  }, 1000);
 });
 
 async function loginForm(e) {
@@ -82,6 +82,7 @@ async function loginForm(e) {
         window.location.reload();
       }, 3200);
     }
+    localStorage.setItem("OFFICE_ROUTES", JSON.stringify(res.data.path))
   } catch (error) {
     Swal.fire({
       title: error?.response?.data?.message,

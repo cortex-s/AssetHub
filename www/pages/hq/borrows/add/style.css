@@ -1,0 +1,24 @@
+@import url("/css/input.css");
+.container {
+  visibility: hidden;
+  display: grid;
+  gap: 10px;
+}
+.form-borrow {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* เทียบประมาณ space-y-3 */
+}
+
+.form-borrow .grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px; /* gap ระหว่างช่องใน grid */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .form-borrow .grid {
+    grid-template-columns: 1fr;
+  }
+}

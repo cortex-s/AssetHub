@@ -8,7 +8,6 @@ import { signJwtToken, tokenExpiredSecond } from "../../lib/jwt.js";
 import { verifyPassword } from "../../lib/password.js";
 import { handler } from "../../utils/handler.js";
 
-// เป็น interface สำหรับการ query หา id, role, hashedPassword จาก Users
 /**
  * @typedef {object} UserRow
  * @property {string} id
@@ -48,6 +47,20 @@ export const login = handler(async (req, res) => {
     role,
     fullname: firstname.concat(" ", lastname),
   });
+  const extraRoutes = []
+  // @ts-ignore
+  if (role === "ADMIN" || role === "STAFF") {
+    if (role === "ADMIN") {
+      extraRoutes.push(
+        { id: "hq-user", label: "จัดการบัญชีผู้ใช้", href: "/hq/users", requireLogin: true },
+      )
+    }
+    extraRoutes.push({ id: "hq-asset", label: "จัดการทรัพย์สิน", href: "/hq/assets", requireLogin: true },
+      { id: "hq-category", label: "จัดการหมวดหมู่", href: "/hq/categories", requireLogin: true },
+      { id: "hq-borrow", label: "จัดการการยืม", href: "/hq/borrows", requireLogin: true }
+    )
+  }
+
   return res
     .status(200)
     .cookie("accessToken", token, {
@@ -59,5 +72,6 @@ export const login = handler(async (req, res) => {
     .json({
       message: "เข้าสู่ระบบสำเร็จ",
       code: "SUCCESS",
+      path: extraRoutes
     });
 });

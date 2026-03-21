@@ -1,7 +1,13 @@
+import { forceLogout, getAuth } from "../utils/cookie.js";
+import { clearOfficeRoutes } from "../utils/route.js";
+
 const basePath = "/pages";
 const pathList = [
-  { label: "หน้าแรก", href: "/index.html" },
-  { label: "เข้าสู่ระบบ", href: "/auth/login", loggedShouldHide: true },
+  { id: "index", label: "หน้าแรก", href: "/index.html" },
+  { id: "login", label: "เข้าสู่ระบบ", href: "/auth/login", loggedShouldHide: true },
+  { id: "history", label: "ประวัติการยืม", href: "/history", requireLogin: true },
+  { id: "backoffice", label: "หลังบ้าน", href: "/hq", requireLogin: true, role: ["ADMIN", "STAFF"] },
+  { id: "logout", label: "ออกจากระบบ", href: "#logout", requireLogin: true }
 ];
 
 function isLoggedIn() {
@@ -15,10 +21,14 @@ export function initNavbar(containerId = "navbar") {
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  const loggedIn = isLoggedIn();
-
+  const loggedIn = getAuth();
+  if (!loggedIn) {
+    clearOfficeRoutes()
+  }
   // กรอง pathList ตาม loggedShouldHide
   const filteredPaths = pathList.filter((item) => {
+    if (item.role && loggedIn && !item?.role.includes(loggedIn.role))return false
+      if (item.requireLogin && !loggedIn) return false
     if (item.loggedShouldHide && loggedIn) return false; // hide ถ้า login
     return true;
   });
@@ -26,7 +36,7 @@ export function initNavbar(containerId = "navbar") {
   const menuItems = filteredPaths
     .map(
       (item) =>
-        `<li><a href="${basePath.concat(item.href)}">${item.label}</a></li>`,
+        `<li><a id="${item.id}" href="${basePath.concat(item.href)}">${item.label}</a></li>`,
     )
     .join("");
 
@@ -47,7 +57,21 @@ export function initNavbar(containerId = "navbar") {
 
   if (!toggleBtn || !menu) return;
   toggleBtn.addEventListener("click", () => menu.classList.toggle("active"));
-}
 
+
+}
+document.addEventListener("click", (e) => {
+  const target = e.target;
+
+  if (!(target instanceof HTMLElement)) return;
+
+  if (target.id === "logout") {
+    e.preventDefault();
+
+    forceLogout();
+
+    window.location.href = "/pages/auth/login";
+  }
+});
 // เรียก init
 initNavbar();

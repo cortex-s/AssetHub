@@ -7,15 +7,10 @@ import { AppError } from "../../../../shared/errors/app.error.js";
 import { assetModel } from "../../models/assets/index.js";
 import { buildUpdateFromDiff } from "../../utils/diff.js";
 
-const schema = assetSchema.edit.transform((x) => ({
-  ...x,
-  notes: x.notes || null,
-  categoryId: x.categoryId || null,
-}));
 
 export const edit = handler(async (req, res) => {
   try {
-    const parsed = schema.safeParse(req.body);
+    const parsed = assetSchema.edit.safeParse(req.body);
     if (!parsed.success) {
       throw new ValidationError(parsed.error.flatten().fieldErrors);
     }
@@ -23,23 +18,26 @@ export const edit = handler(async (req, res) => {
 
     const asset = await assetModel.hasAsset(data.id, [
       "id",
-      "assetCode",
-      "serialNo",
       "name",
       "notes",
       "categoryId",
+      "status"
     ]);
     if (!asset) {
       throw new AppError("ไม่พบทรัพย์สินดังกล่าว", "ASSET_NOTFOUND", 404);
     }
+    const borrowingData = await assetModel.borrowing(data.id)
 
-    const diffList = odiff(asset, data);
+    if (borrowingData && data.status !== asset.status) {
+      throw new AppError("มีผู้ยืมอยู่ ไม่สามารถแก้สถานะได้", "NOT_MODIFIES", 400)
+    }
+
+    const diffList = odiff(asset, { 'id': data.id, name: data.name, notes: data.notes, categoryId: data.categoryId, status: data.status });
     const { setClause, values } = buildUpdateFromDiff(diffList);
 
     if (values.length === 0) {
       throw new AppError("แก้ไขข้อมูลทรัพย์สินสำเร็จ", "NOT_MODIFIES", 200);
     }
-
     await assetModel.update(setClause, values, data.id);
 
     return res

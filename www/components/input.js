@@ -8,17 +8,23 @@ export function initInputs() {
     const name = wrapper.dataset.name;
     const label = wrapper.dataset.label || "";
     const placeholder = wrapper.dataset.placeholder || "";
-    const type = wrapper.dataset.type || "text"; // default text input
+    const type = wrapper.dataset.type || "text";
     const id = `${name}-input`;
+
+    //  รองรับ disabled
+    const isDisabled =
+      wrapper.hasAttribute("data-disabled") ||
+      wrapper.hasAttribute("disabled");
 
     wrapper.classList.add("form-group");
 
-    // สร้าง label
     const labelHTML = label
       ? `<label for="${id}" class="form-label">${label}</label>`
       : "";
 
-    // ถ้าเป็น select
+    // =========================
+    // SELECT
+    // =========================
     if (type === "select") {
       let optionsHTML = "";
       try {
@@ -32,7 +38,12 @@ export function initInputs() {
 
       wrapper.innerHTML = `
         ${labelHTML}
-        <select id="${id}" name="${name}" class="input">
+        <select 
+          id="${id}" 
+          name="${name}" 
+          class="input"
+          ${isDisabled ? "disabled" : ""}
+        >
           ${optionsHTML}
         </select>
         <p class="input-error"></p>
@@ -42,14 +53,16 @@ export function initInputs() {
       if (!select) return;
 
       select.addEventListener("focus", () =>
-        wrapper.classList.add("is-focused"),
+        wrapper.classList.add("is-focused")
       );
       select.addEventListener("blur", () =>
-        wrapper.classList.remove("is-focused"),
+        wrapper.classList.remove("is-focused")
       );
       select.addEventListener("change", () => clearError(select));
     } else {
-      // ปกติสร้าง input
+      // =========================
+      // INPUT
+      // =========================
       wrapper.innerHTML = `
         ${labelHTML}
         <input 
@@ -58,6 +71,7 @@ export function initInputs() {
           name="${name}"
           type="${type}"
           placeholder="${placeholder}"
+          ${isDisabled ? "disabled" : ""}
         />
         <p class="input-error"></p>
       `;
@@ -66,16 +80,15 @@ export function initInputs() {
       if (!input) return;
 
       input.addEventListener("focus", () =>
-        wrapper.classList.add("is-focused"),
+        wrapper.classList.add("is-focused")
       );
       input.addEventListener("blur", () =>
-        wrapper.classList.remove("is-focused"),
+        wrapper.classList.remove("is-focused")
       );
       input.addEventListener("input", () => clearError(input));
     }
   });
 }
-
 /**
  * @param {HTMLInputElement|HTMLSelectElement} input
  * @param {string} message
@@ -134,7 +147,43 @@ export function getInput(name) {
 export function clearFormErrors(form) {
   form.querySelectorAll("input, select").forEach((el) => clearError(el));
 }
+export function fillForm(data) {
+  const inputs = document.querySelectorAll("[data-input]");
 
+  inputs.forEach((wrapper) => {
+    const name = wrapper.dataset.name;
+    if (!name) return;
+
+    const input = wrapper.querySelector("input, select, textarea");
+    if (!input) return;
+
+    // set value
+    if (data[name] !== undefined && data[name] !== null) {
+      input.value = data[name];
+    }
+  });
+}
+export function setSelectOptions(wrapper, options, placeholderText, defaultValue) {
+  const select = wrapper.querySelector("select");
+  if (!select) return;
+
+  select.innerHTML = "";
+
+  const placeholder = document.createElement("option");
+  placeholder.value = "";
+  placeholder.textContent = placeholderText;
+  select.appendChild(placeholder);
+
+  options.forEach((opt) => {
+    const option = document.createElement("option");
+    option.value = opt.value;
+    option.textContent = opt.label;
+    if (defaultValue && opt.value === defaultValue) {
+      option.selected = true
+    }
+    select.appendChild(option);
+  });
+}
 // /**
 //  * Initialise all data-input components
 //  * @returns {void}

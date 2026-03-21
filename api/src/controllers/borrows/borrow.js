@@ -38,14 +38,14 @@ export const borrow = handler(async (req, res) => {
     );
   }
 
-  const user = await userModel.hasUser(data.userId);
-  if (!user) {
+  const borrower = await userModel.hasUser(data.userId);
+  if (!borrower) {
     throw new AppError("ไม่พบบัญชีผู้ยืม", "BORROWER_NOTFOUND", 404);
   }
 
   await borrowModel.borrow(
     asset,
-    { ...data, borrowerName: getFullName(user.firstname, user.lastname) },
+    { ...data, borrowerName: getFullName(borrower.firstname, borrower.lastname) },
     req.user.userId,
   );
 

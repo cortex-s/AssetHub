@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Asset Management</title>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "zod": "/lib/zod.js",
+          "/shared/validators/": "/validators/"
+        }
+      }
+    </script>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <script type="module" src="/lib/axios.js"></script>
+    <script type="module" src="/components/navbar.js"></script>
+    <script type="module" src="register.js"></script>
+  </head>
+
+  <body>
+    <div id="navbar"></div>
+
+ <main class="register-page">
+  <div class="register-card">
+    <h1 class="register-title">สมัครสมาชิก</h1>
+    <p class="register-desc">สร้างบัญชีใหม่สำหรับระบบ</p>
+
+    <form class="register-form">
+      <div class="grid space-y-3">
+        <div
+          data-input
+          data-name="firstname"
+          data-label="ชื่อ"
+          data-placeholder="กรอกชื่อ"
+        ></div>
+
+        <div
+          data-input
+          data-name="lastname"
+          data-label="นามสกุล"
+          data-placeholder="กรอกนามสกุล"
+        ></div>
+      </div>
+
+      <div
+        data-input
+        data-name="email"
+        data-label="อีเมล"
+        data-placeholder="กรอกอีเมล"
+      ></div>
+
+      <div
+        data-input
+        data-name="password"
+        data-label="รหัสผ่าน"
+        data-placeholder="กรอกรหัสผ่าน"
+      ></div>
+
+      <button type="submit" class="btn-primary register-btn">
+        สมัครสมาชิก
+      </button>
+    </form>
+
+    <p class="register-footer">
+      มีบัญชีแล้ว?
+      <a href="/pages/auth/login">เข้าสู่ระบบ</a>
+    </p>
+  </div>
+</main>
+  </body>
+</html>

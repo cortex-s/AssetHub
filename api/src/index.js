@@ -28,6 +28,7 @@ import meRoutes from "./routes/me.js";
 import categoryRoutes from "./routes/categories.js";
 import assetRoutes from "./routes/assets.js";
 import borrowRoutes from "./routes/borrows.js";
+import userRoutes from "./routes/users.js";
 
 // Manage Routes
 app.use("/api/auth", authRoutes);
@@ -36,6 +37,7 @@ app.use("/api/@me", meRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/assets", assetRoutes);
 app.use("/api/borrows", borrowRoutes);
+app.use("/api/users", userRoutes);
 app.use(errorMiddleware);
 
 app.listen(port, () => console.log("Running at port:", port));

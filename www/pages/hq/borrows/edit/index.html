@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Borrow</title>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "zod": "/lib/zod.js",
+          "/shared/validators/": "/validators/"
+        }
+      }
+    </script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- JS -->
+    <script type="module" src="/lib/zod.js"></script>
+    <script type="module" src="/lib/axios.js"></script>
+
+    <script type="module" src="/components/navbar.js"></script>
+    <script type="module" src="/components/footer.js"></script>
+    <script type="module" src="/components/go-back.js"></script>
+
+    <script type="module" src="script.js"></script>
+  </head>
+
+  <body>
+    <div id="navbar"></div>
+
+    <main class="container">
+      <div id="goback"></div>
+
+      <h1 id="hero-text"></h1>
+
+      <form class="form-asset">
+        <!-- Borrow Info (optional display) -->
+        <div class="grid">
+          <div
+            data-input
+            data-name="assetCode"
+            data-label="รหัสทรัพย์"
+            disabled
+          ></div>
+
+          <div
+            data-input
+            data-name="serialNo"
+            data-label="Serial Number"
+            disabled
+          ></div>
+        </div>
+
+        <!-- Status -->
+        <div
+          data-input
+          data-name="status"
+          data-label="สถานะ"
+          data-type="select"
+          data-options='[
+            {"value":"borrowed","label":"ถูกยืม"},
+            {"value":"returned","label":"คืนแล้ว"},
+            {"value":"overdue","label":"เกินกำหนด"},
+            {"value":"cancelled","label":"ยกเลิก"}
+          ]'
+        ></div>
+
+        <!-- Internal Notes (staff only) -->
+        <div
+          data-input
+          data-name="internalNotes"
+          data-label="หมายเหตุภายใน (เจ้าหน้าที่)"
+          data-placeholder="หมายเหตุภายใน"
+        ></div>
+
+        <!-- Public Notes -->
+        <div
+          data-input
+          data-name="publicReturnedNotes"
+          data-label="หมายเหตุการคืน (ผู้ใช้เห็นได้)"
+          data-placeholder="หมายเหตุการคืน"
+        ></div>
+
+        <!-- Return Date -->
+        <div
+          data-input
+          data-name="returnDate"
+          data-label="วันที่คืน"
+          data-type="date"
+        ></div>
+
+        <button type="submit" class="btn-primary">บันทึก</button>
+      </form>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>

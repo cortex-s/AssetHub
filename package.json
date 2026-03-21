@@ -29,7 +29,8 @@
     "shared/validators/"
   ],
   "dependencies": {
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "cookie-parser": "^1.4.7"
   },
   "devDependencies": {
     "@types/node": "^25.5.0"
