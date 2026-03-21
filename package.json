@@ -2,13 +2,13 @@
   "name": "pleasedonotcopy",
   "version": "1.0.0",
   "description": "",
-  "homepage": "https://github.com/cortex-s/PleaseDoNotCopy#readme",
+  "homepage": "https://github.com/cortex-s/AssetHub",
   "bugs": {
-    "url": "https://github.com/cortex-s/PleaseDoNotCopy/issues"
+    "url": "https://github.com/cortex-s/As  setHub/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cortex-s/PleaseDoNotCopy.git"
+    "url": "git+https://github.com/cortex-s/AssetHub.git"
   },
   "license": "ISC",
   "author": "",
