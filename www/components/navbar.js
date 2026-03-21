@@ -5,6 +5,7 @@ const basePath = "/pages";
 const pathList = [
   { id: "index", label: "หน้าแรก", href: "/index.html" },
   { id: "login", label: "เข้าสู่ระบบ", href: "/auth/login", loggedShouldHide: true },
+  { id: "register", label: "สมัครสมาชิก", href: "/auth/register", loggedShouldHide: true },
   { id: "history", label: "ประวัติการยืม", href: "/history", requireLogin: true },
   { id: "backoffice", label: "หลังบ้าน", href: "/hq", requireLogin: true, role: ["ADMIN", "STAFF"] },
   { id: "logout", label: "ออกจากระบบ", href: "#logout", requireLogin: true }
@@ -27,8 +28,8 @@ export function initNavbar(containerId = "navbar") {
   }
   // กรอง pathList ตาม loggedShouldHide
   const filteredPaths = pathList.filter((item) => {
-    if (item.role && loggedIn && !item?.role.includes(loggedIn.role))return false
-      if (item.requireLogin && !loggedIn) return false
+    if (item.role && loggedIn && !item?.role.includes(loggedIn.role)) return false
+    if (item.requireLogin && !loggedIn) return false
     if (item.loggedShouldHide && loggedIn) return false; // hide ถ้า login
     return true;
   });
