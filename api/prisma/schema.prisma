@@ -8,6 +8,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ใช้เพื่อช่วยให้การออกแบบโครงสร้างฐานข้อมูลนั้นได้เร็วขึ้นเท่านั้น ไม่ได้ใช้ Prisma ในการ Query จริง. โดย SQL จะเขียนเองในโฟลเดอร์ controllers และ models ครับ
+
 enum Role {
   ADMIN
   STAFF
