@@ -8,7 +8,8 @@
   "main": "index.js",
   "scripts": {
     "prisma:generate": "prisma generate",
-    "start": "node src/index.js",
+    "migrate": "prisma migrate deploy && npm run prisma:generate",
+    "start": "npm run migrate && node src/index.js",
     "dev": "node --watch src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

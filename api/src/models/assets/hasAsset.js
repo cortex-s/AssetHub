@@ -1,5 +1,5 @@
 import { db } from "../../lib/db.js";
-import { $Enums, Prisma } from "../../lib/generated/prisma/index.js";
+import { $Enums } from "../../lib/generated/prisma/index.js";
 
 /**
  * @typedef {object} Asset
