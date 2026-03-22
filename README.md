@@ -1,4 +1,4 @@
-## How to setup project
+## วิธีการติดตั้งและตั้งค่า Project
 
 1. git clone แล้วเข้าโฟลเดอร์  
    `git clone https://github.com/cortex-s/AssetHub.git && cd AssetHub`

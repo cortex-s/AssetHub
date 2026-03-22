@@ -53,9 +53,9 @@
           {
             name: "จัดการ",
             formatter: (_, row) => {
-              const id = row.cells[2].data; 
+              const id = row.cells[2].data;
               return gridjs.html(`
-          <a href="/pages/hq/assets/edit/index.html?id=${id}">
+          <a href="/pages/hq/categories/edit/index.html?id=${id}">  // หน้านั้นยังไม่เสร็จ
             <button class="btn-primary">แก้ไข</button>
           </a>
         `);
